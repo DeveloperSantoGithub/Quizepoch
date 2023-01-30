@@ -1,11 +1,14 @@
-import '../components/Styles/Global.styles.css';
-import Navbar from './Navbar';
+import '../Styles/Global.css';
+import Layout from './Layout';
+import Home from './Pages/Home';
 
 function App() {
 	return (
-		<div className="App">
-			<Navbar />
-		</div>
+		<>
+			<Layout>
+				<Home />
+			</Layout>
+		</>
 	);
 }
 
