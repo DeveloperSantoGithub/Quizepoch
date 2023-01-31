@@ -1,4 +1,4 @@
-import logo from '../Assets/images/logo-bg.png';
+import logo from '../Assets/images/Quizepoch-logo.png';
 import classes from '../Styles/Navbar.module.css';
 import Account from './Account';
 export default function Navbar() {
