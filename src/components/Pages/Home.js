@@ -1,9 +1,9 @@
-import Video from '../Videos';
+import Videos from '../Videos';
 
 export default function Home() {
 	return (
 		<div>
-			<Video />
+			<Videos />
 		</div>
 	);
 }
