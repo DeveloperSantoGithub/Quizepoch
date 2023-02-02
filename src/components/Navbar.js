@@ -1,4 +1,5 @@
-import logo from '../Assets/images/Quizepoch-logo.png';
+import { Link } from 'react-router-dom';
+import logo from '../Assets/images/quiz-logo.png';
 import classes from '../Styles/Navbar.module.css';
 import Account from './Account';
 export default function Navbar() {
@@ -6,10 +7,10 @@ export default function Navbar() {
 		<nav className={classes.nav}>
 			<ul>
 				<li>
-					<a href="index.html" className={classes.brand}>
+					<Link to="/" className={classes.brand}>
 						<img src={logo} alt="Quizepoch Logo" />
 						<h3>Quizepoch</h3>
-					</a>
+					</Link>
 				</li>
 			</ul>
 			<Account />

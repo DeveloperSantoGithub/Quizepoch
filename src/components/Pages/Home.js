@@ -1,9 +1,12 @@
+import { Link } from 'react-router-dom';
 import Videos from '../Videos';
 
 export default function Home() {
 	return (
 		<div>
-			<Videos />
+			<Link to="quiz">
+				<Videos />
+			</Link>
 		</div>
 	);
 }
