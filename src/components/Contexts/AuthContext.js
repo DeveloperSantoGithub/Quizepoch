@@ -18,6 +18,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	useEffect(() => {
 		const auth = getAuth();
+
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			setCurrentUser(user);
 			setLoading(false);
@@ -43,6 +44,7 @@ export function AuthProvider({ children }) {
 
 		//=> Update Local State:
 		const user = auth.currentUser;
+
 		setCurrentUser({
 			...user,
 		});
@@ -64,6 +66,7 @@ export function AuthProvider({ children }) {
 		return signOut(auth);
 	}
 
+	//=> Set all to the Value:
 	const value = {
 		currentUser,
 		signup,
