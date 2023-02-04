@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import classes from '../Styles/Signup.module.css';
@@ -9,6 +8,7 @@ import Form from './Form';
 import TextInput from './TextInput';
 
 export default function SignupForm() {
+	//=>Inputs States:
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -24,9 +24,9 @@ export default function SignupForm() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 
-		//=> validition:
+		//=> Do Validation:
 		if (password !== confirmPassword) {
-			return setError(`Password don't match!`);
+			return setError("The password doesn't match!");
 		}
 
 		try {
@@ -35,8 +35,8 @@ export default function SignupForm() {
 			await signup(email, password, username);
 			navigate('/');
 		} catch (err) {
-			// console.log(err);
 			setLoading(false);
+			console.log(err);
 
 			switch (err.code) {
 				case 'auth/weak-password':
@@ -113,13 +113,13 @@ export default function SignupForm() {
 				}}
 			/>
 
-			<Button type="submit">
+			<Button disabled={loading} type="submit">
 				<span>Submit now</span>
 			</Button>
 
 			{error && <p className="error">{error}</p>}
 
-			<div class="info">
+			<div className="info">
 				Already have an account? <Link to="../login">Login</Link> instead.
 			</div>
 		</Form>

@@ -4,7 +4,7 @@ import Videos from '../Videos';
 export default function Home() {
 	return (
 		<div>
-			<Link to="quiz">
+			<Link to="/quiz">
 				<Videos />
 			</Link>
 		</div>

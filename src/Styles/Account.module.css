@@ -11,3 +11,10 @@
 .account > span:last-child {
 	cursor: pointer;
 }
+
+.accountText {
+	text-transform: uppercase;
+	color: #9162ee;
+	font-size: 0.8rem;
+	font-weight: 600;
+}
