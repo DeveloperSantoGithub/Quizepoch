@@ -7,6 +7,7 @@ import Login from './Pages/Login';
 import Quiz from './Pages/Quiz';
 import Result from './Pages/Result';
 import Signup from './Pages/Signup';
+import PrivateOutlet from './PrivateOutlet';
 
 function App() {
 	return (
@@ -18,8 +19,11 @@ function App() {
 							<Route path="/" element={<Home />} />
 							<Route path="/signup" element={<Signup />} />
 							<Route path="/login" element={<Login />} />
-							<Route path="/quiz" element={<Quiz />} />
-							<Route path="/result" element={<Result />} />
+
+							<Route path="/*" element={<PrivateOutlet />}>
+								<Route path="quiz" element={<Quiz />} />
+								<Route path="result" element={<Result />} />
+							</Route>
 						</Routes>
 					</Layout>
 				</AuthProvider>
