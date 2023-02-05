@@ -40,4 +40,10 @@ export default function useVideoList() {
 
 		fetchVideos();
 	}, []);
+
+	return {
+		loading,
+		error,
+		videos,
+	};
 }
