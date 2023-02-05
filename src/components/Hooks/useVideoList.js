@@ -52,6 +52,7 @@ export default function useVideoList(page) {
 				setError(true);
 			}
 		}
+
 		fetchVideos();
 	}, [page]);
 

@@ -5,6 +5,7 @@ import Layout from './Layout';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Quiz from './Pages/Quiz';
+import QuizNotFound from './Pages/QuizNotFound';
 import Result from './Pages/Result';
 import Signup from './Pages/Signup';
 import PrivateOutlet from './PrivateOutlet';
@@ -25,7 +26,8 @@ function App() {
 							</Route>
 
 							<Route path="/*" element={<PrivateOutlet />}>
-								<Route path="quiz" element={<Quiz />} />
+								<Route path="quiz/:id" element={<Quiz />} />
+								<Route path="no-quiz" element={<QuizNotFound />} />
 								<Route path="result" element={<Result />} />
 							</Route>
 						</Routes>
