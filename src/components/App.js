@@ -28,7 +28,7 @@ function App() {
 							<Route path="/*" element={<PrivateOutlet />}>
 								<Route path="quiz/:id" element={<Quiz />} />
 								<Route path="no-quiz" element={<QuizNotFound />} />
-								<Route path="result" element={<Result />} />
+								<Route path="result/:id" element={<Result />} />
 							</Route>
 						</Routes>
 					</Layout>

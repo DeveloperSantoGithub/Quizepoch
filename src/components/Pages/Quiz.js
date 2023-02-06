@@ -2,9 +2,11 @@ import Answers from '../Answers';
 import MiniPlayer from '../MiniPlayer';
 import ProgressBar from '../ProgressBar';
 
+import { getDatabase, ref, set } from 'firebase/database';
 import _ from 'lodash';
 import { useEffect, useReducer, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
 import useQuiz from '../Hooks/useQuiz';
 
 const initialState = null;
@@ -33,6 +35,8 @@ const reducer = (state, action) => {
 
 export default function Quiz() {
 	const { id } = useParams();
+	const navigate = useNavigate();
+	const { currentUser } = useAuth();
 	const { loading, error, questions } = useQuiz(id);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 
@@ -54,10 +58,41 @@ export default function Quiz() {
 		});
 	}
 
+	//=> Next Question Button:
 	function nextQuestion() {
 		if (currentQuestion <= questions.length) {
 			setCurrentQuestion((preCurrentQusestion) => preCurrentQusestion + 1);
 		}
+	}
+
+	//=> Previous Question Button:
+	function prevQuestion() {
+		if (currentQuestion >= 1 && currentQuestion <= questions.length) {
+			setCurrentQuestion((preCurrentQusestion) => preCurrentQusestion - 1);
+		}
+	}
+
+	//=> Progress Bar Calculation:
+	const progressPercentage =
+		questions.length > 0 ? ((currentQuestion + 1) / questions.length) * 100 : 0;
+
+	//=> Submit Quiz:
+	async function submit() {
+		const { uid } = currentUser;
+
+		const DB = getDatabase();
+		const resultRef = ref(DB, `result/${uid}`);
+
+		await set(resultRef, {
+			[id]: qna,
+		});
+
+		navigate({
+			pathname: `/result/${id}`,
+			state: {
+				qna,
+			},
+		});
 	}
 
 	return (
@@ -74,7 +109,12 @@ export default function Quiz() {
 						options={qna[currentQuestion].options}
 						handleChange={handleAnswerChange}
 					/>
-					<ProgressBar />
+					<ProgressBar
+						next={nextQuestion}
+						prev={prevQuestion}
+						progress={progressPercentage}
+						submitQuiz={submit}
+					/>
 					<MiniPlayer />
 				</>
 			)}
