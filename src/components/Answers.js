@@ -10,7 +10,8 @@ export default function Answers({ options = [], handleChange }) {
 					text={option.title}
 					value={index}
 					checked={option.checked}
-					onChange={handleChange}
+					key={index}
+					onChange={(e) => handleChange(e, index)}
 				/>
 			))}
 		</div>

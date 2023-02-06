@@ -12,7 +12,7 @@ const initialState = null;
 const reducer = (state, action) => {
 	switch (action.type) {
 		case 'questions':
-			action.value.questions.forEach((question) => {
+			action.value.forEach((question) => {
 				question.options.forEach((option) => {
 					option.checked = false;
 				});
