@@ -54,6 +54,12 @@ export default function Quiz() {
 		});
 	}
 
+	function nextQuestion() {
+		if (currentQuestion <= questions.length) {
+			setCurrentQuestion((preCurrentQusestion) => preCurrentQusestion + 1);
+		}
+	}
+
 	return (
 		<>
 			{loading && <span className="success">Loading...</span>}
