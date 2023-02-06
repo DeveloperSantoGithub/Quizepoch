@@ -1,7 +1,7 @@
 import classes from '../Styles/Question.module.css';
 import Answers from './Answers';
 
-export default function Question() {
+export default function Question({ answers = [] }) {
 	return (
 		<div className={classes.question}>
 			<div className={classes.qtitle}>
