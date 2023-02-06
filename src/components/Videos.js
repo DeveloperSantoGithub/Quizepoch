@@ -28,7 +28,7 @@ export default function Videos() {
 								/>
 							</Link>
 						) : (
-							<Link to="/no-quiz">
+							<Link to="/no-quiz" key={video.youtubeID}>
 								<Video
 									title={video.title}
 									id={video.youtubeID}

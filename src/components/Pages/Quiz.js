@@ -87,8 +87,7 @@ export default function Quiz() {
 			[id]: qna,
 		});
 
-		navigate({
-			pathname: `/result/${id}`,
+		navigate(`/result/${id}`, {
 			state: {
 				qna,
 			},
