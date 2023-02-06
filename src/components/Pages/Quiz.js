@@ -2,7 +2,8 @@ import Answers from '../Answers';
 import MiniPlayer from '../MiniPlayer';
 import ProgressBar from '../ProgressBar';
 
-import { useReducer, useState } from 'react';
+import _ from 'lodash';
+import { useEffect, useReducer, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useQuiz from '../Hooks/useQuiz';
 
@@ -17,6 +18,14 @@ const reducer = (state, action) => {
 				});
 			});
 			return action.value;
+		case 'answer':
+			const copiedQuestions = _.cloneDeep(state);
+
+			copiedQuestions[action.questionID].options[action.optionIndex].checked =
+				action.value;
+
+			return copiedQuestions;
+
 		default:
 			return state;
 	}
@@ -25,18 +34,44 @@ const reducer = (state, action) => {
 export default function Quiz() {
 	const { id } = useParams();
 	const { loading, error, questions } = useQuiz(id);
-	const [currentQuestions, setCurrentQuestions] = useState(0);
+	const [currentQuestion, setCurrentQuestion] = useState(0);
 
 	const [qna, dispatch] = useReducer(reducer, initialState);
 
+	useEffect(() => {
+		dispatch({
+			type: 'questions',
+			value: questions,
+		});
+	}, [questions]);
+
+	function handleAnswerChange(e, index) {
+		dispatch({
+			type: 'answer',
+			questionID: currentQuestion,
+			optionIndex: index,
+			value: e.target.checked,
+		});
+	}
+
 	return (
 		<>
-			<h1>Pick three of your favorite Star Wars Flims</h1>
-			<h4>Question can have multiple answers</h4>
+			{loading && <span className="success">Loading...</span>}
+			{error && <span className="error">There was an error!</span>}
 
-			<Answers />
-			<ProgressBar />
-			<MiniPlayer />
+			{!loading && !error && qna && qna.length > 0 && (
+				<>
+					<h1>{qna[currentQuestion].title}</h1>
+					<h4>Question can have multiple answers</h4>
+
+					<Answers
+						options={qna[currentQuestion].options}
+						handleChange={handleAnswerChange}
+					/>
+					<ProgressBar />
+					<MiniPlayer />
+				</>
+			)}
 		</>
 	);
 }
