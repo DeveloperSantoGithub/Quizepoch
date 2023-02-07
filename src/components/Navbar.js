@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../Assets/images/quiz-logo.png';
+import logo from '../Assets/images/logo.png';
 import classes from '../Styles/Navbar.module.css';
 import Account from './Account';
 export default function Navbar() {
