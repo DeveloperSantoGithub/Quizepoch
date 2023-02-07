@@ -6,7 +6,7 @@ export default function Answers({ options = [], handleChange, input }) {
 	return (
 		<div className={classes.answers}>
 			{options.map((option, index) => (
-				<Fragment>
+				<Fragment key={index}>
 					{input ? (
 						<Checkbox
 							className={classes.answer}
