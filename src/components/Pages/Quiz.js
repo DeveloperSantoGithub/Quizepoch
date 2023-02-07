@@ -115,7 +115,7 @@ export default function Quiz() {
 						progress={progressPercentage}
 						submitQuiz={submit}
 					/>
-					<MiniPlayer />
+					<MiniPlayer id={id} />
 				</>
 			)}
 		</>

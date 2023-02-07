@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
-import img from '../Assets/images/3.jpg';
+import ReactPlayer from 'react-player';
 import classes from '../Styles/MiniPlayer.module.css';
 
-export default function MiniPlayer() {
+export default function MiniPlayer({ id }) {
 	const [status, setStatus] = useState(false);
+	const videoUrl = `https://www.youtube.com/watch?v=${id}`;
 
 	const buttonRef = useRef();
 
@@ -26,15 +27,25 @@ export default function MiniPlayer() {
 				className={`material-icons-outlined ${classes.open}`}
 				onClick={toggleMiniPlayer}
 			>
-				play_circle_filled
+				{' '}
+				play_circle_filled{' '}
 			</span>
 			<span
 				className={`material-icons-outlined ${classes.close}`}
 				onClick={toggleMiniPlayer}
 			>
-				close
+				{' '}
+				close{' '}
 			</span>
-			<img src={img} alt="Mini player" />
+
+			<ReactPlayer
+				className={classes.player}
+				url={videoUrl}
+				width="300px"
+				height="168px"
+				playing={status}
+				controls
+			/>
 			<p>#23 React Hooks Bangla - React useReducer hook Bangla</p>
 		</div>
 	);
